@@ -1,0 +1,6 @@
+<h2>Messages</h2>
+<div *ngIf="messageService.messages.length ; else isVoid">
+  <button [class.clear] (click)="messageService.clear()">Supprimer les messages</button>
+  <div *ngFor="let message of messageService.messages">{{ message }}</div>
+</div>
+<ng-template #isVoid><div>Vide</div></ng-template>

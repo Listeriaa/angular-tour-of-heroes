@@ -1,0 +1,21 @@
+<h2>Tous les héros</h2>
+<!-- | sert à formater: lower/uppercase ou les dates ou les monnaies, nombres... -->
+
+<!-- <div><span>id : </span>{{ hero.id }}</div>
+<div><span>Nom : </span>{{ hero.name }}</div>
+
+<div>
+  <label for="name">Hero name: </label>
+  <input id="name" [(ngModel)]="hero.name" placeholder="name">
+</div> -->
+
+<ul class="heroes">
+  <li
+  *ngFor="let hero of heroes; index as i"
+  [class.selected]="hero === selectedHero"
+  (click) = "onSelect(hero)">
+    <div ><span class="badge">{{ hero.id }}</span>{{ hero.name |uppercase }}</div>
+  </li>
+
+</ul>
+<app-hero-detail [hero] = "selectedHero"></app-hero-detail>
