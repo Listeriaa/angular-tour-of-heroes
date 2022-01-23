@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Hero } from '../hero'
 // import { HEROES } from '../mock-heroes';
-import { HeroDetailComponent } from '../hero-detail/hero-detail.component'
 import { HeroService } from '../hero.service'
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cpt-heroes', // le nom que l'on donne au composant pour l'appeler dans l'app
@@ -13,7 +12,7 @@ import { HeroService } from '../hero.service'
 export class HeroesComponent implements OnInit {
 
   //On passe le service dans le constructeur, pour avoir son instance dans le composant
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, public messageService: MessageService) { }
 
   //methode hook qui se lance à la création du composant
   ngOnInit(): void {
@@ -35,6 +34,11 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero:Hero) {
     this.selectedHero = hero
-
+    const hour: number = new Date().getHours()
+    let minutes: number|string = new Date().getMinutes()
+    if (minutes < 10) {
+      minutes = '0' + minutes.toString()
+    }
+    this.messageService.add(`Vous avez sélectionné ${hero.name} à ${hour}H${minutes}`)
   }
 }
