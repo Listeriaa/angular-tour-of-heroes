@@ -36,4 +36,11 @@ export class HeroDetailComponent implements OnInit {
     // permet de revenir a la page précédente
     this.location.back()
   }
+
+  save() {
+    if (this.hero) {
+
+      this.heroService.update(this.hero).subscribe(() => this.goBack())
+    }
+  }
 }

@@ -31,6 +31,7 @@ export class HeroesComponent implements OnInit {
 
   // propriété qui est indéfinie et qui sera de type Hero
   selectedHero? : Hero
+  heroName? : string
 
   onSelect(hero:Hero) {
     this.selectedHero = hero
@@ -40,5 +41,21 @@ export class HeroesComponent implements OnInit {
       minutes = '0' + minutes.toString()
     }
     this.messageService.add(`Vous avez sélectionné ${hero.name} à ${hour}H${minutes}`)
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+
+  delete(hero : Hero): void {
+    this.heroes = this.heroes.filter(item => item !== hero) // je le supprime dans la liste des héros
+    
+    this.heroService.deleteHero(hero)
+    .subscribe()
   }
 }
